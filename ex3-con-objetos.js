@@ -296,21 +296,65 @@ const flightReservations = [
 ];
 
 // Usa el método forEach para iterar por cada uno de los vuelos y mostrarlos por consola
+flightReservations.forEach(flightReservation => console.log(flightReservation))
 
 // Usa el método forEach para mostrar UNICAMENTE el pasajero de cada uno de lo vuelos
+flightReservations.forEach(flightReservation => console.log(flightReservation.passenger))
 
 // USa el método find para encontrar el vuelo número 'AA456'. Luego, muestra por consola el precio total de este vuelo
+function searchFlight(){
+  const flightSearched = flightReservations.find(flightReservation => flightReservation.flightNumber === 'AA456')
+  return flightSearched.totalPrice
+}
+console.log(searchFlight())
 
 // Usa el método find para encontrar el vuelo que ha reservado el señor bob.johnson@example.com. Muestra el objeto entero
+function searchFlightByEmail(){
+  const flightSearched = flightReservations.find(flightReservation => flightReservation.passenger.contactInfo.email === 'bob.johnson@example.com')
+  return flightSearched.flightNumber
+}
+console.log(searchFlightByEmail())
 
 // Usa el método some para averiguar si algún vuelo tiene como destino el aeropuerto de LPA GRAN CANARIA
+function searchFlightByArrival(){
+  const flightSearched = flightReservations.some(flightReservation => flightReservation.arrival.airport === "LPA GRAN CANARIA")
+  return flightSearched
+}
+console.log(searchFlightByArrival())
 
 // Usa el método every para comprobar si todos los vuelos están confirmados (isConfirmed)
+function checkFlightsAreConfirmed(){
+  const areConfirmed = flightReservations.every(flightReservation => flightReservation.isConfirmed === true)
+  return areConfirmed
+}
+console.log(checkFlightsAreConfirmed())
 
 // Usa el método filter para obtener todos los vuelos que tienen la puerta de embarque 'D5'
+function checkD5DoorFlights(){
+  const haveD5Door =  flightReservations.filter(flightReservation => flightReservation.gate === "D5")
+  return haveD5Door
+}
+console.log(checkD5DoorFlights())
 
 // Usa el método filter para obtener todos los vuelos que incluyen menús con comida Vegan. BONUS: Muestra por consola el nombre de la aerolínea
+function filterVeganAirlines(){
+  const veganFlights = flightReservations.filter(flightReservation => flightReservation.specialMeals.includes("Vegan"))
+  veganFlights.forEach(veganflight => console.log(veganflight.airline))
+}
+filterVeganAirlines()
 
 // Usa el método map para convertir cada objeto en un string con el formato 'numero de vuelo'-'compañía area'´Ejemplo : "AA456-American Airlines"
+function changeFlightFormat(){
+  const newFlightFormat = flightReservations.map(flight => flight.flightNumber + "-" + flight.airline)
+  console.log(newFlightFormat)
+}
+changeFlightFormat()
 
 // DIFICIL. USA el método reduce para sumar el conjunto total de puntos obtenidos de loyalyProgram de todos los tickets
+function sumLoyalyProgramPoints(){
+  const totalPoints = flightReservations.reduce((acum, flightReservation) => {
+    return acum + flightReservation.loyaltyProgram.points
+  }, 0)
+  console.log(totalPoints)
+}
+sumLoyalyProgramPoints()

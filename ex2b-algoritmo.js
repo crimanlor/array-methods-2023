@@ -10,6 +10,8 @@
  * @returns {array} Devuelve un array de numbers 
  */
 function toNumberArray(stringarray) {
+    const newArray = stringarray.map(string => Number(string) )
+    return newArray
 }
 
 // Caso de prueba 1: Números enteros en forma de strings
